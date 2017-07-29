@@ -234,6 +234,8 @@ class CarsController extends AppController
      */
     public function index()
     {
+        // TODO: uncomment for production
+        /*
         $make = $this->request->getQuery('make');
         $model = $this->request->getQuery('model');
         $ppsr_created = $this->request->getQuery('ppsr_created');
@@ -242,9 +244,9 @@ class CarsController extends AppController
         if (!$plate_number || !($data = $this->Cars->findByPlateNumber($plate_number))) {
             $data = $this->Cars->find()->where(compact('make', 'model', 'ppsr_created'))->first();
         }
+        */
 
         // For testing purposes
-        //$data = $this->_testDataset;
         shuffle($this->_testDataset);
         $data = reset($this->_testDataset);
 
