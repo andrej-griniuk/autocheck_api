@@ -66,4 +66,23 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
+
+    /**
+     * Before render callback.
+     *
+     * @param \Cake\Event\Event $event The beforeRender event.
+     * @return \Cake\Network\Response|null|void
+     */
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
+
+        $this->response->cors($this->request)
+            ->allowOrigin(['*'])
+            ->allowMethods(['GET', 'POST'])
+            ->allowHeaders(['X-CSRF-Token'])
+            ->allowCredentials()
+            ->exposeHeaders(['Link'])
+            ->maxAge(300)
+            ->build();
+    }
 }
